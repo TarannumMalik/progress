@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #8f8f8f;
+        }
+        .container{
+            height: 400px;
+            width: 400px;
+            background-color: #ffffff;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+        }
+        .circular-progress{
+            position: relative;
+            height: 250px;
+            width: 250px;
+            background-color: #000;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+        .circular-progress::before{
+            content: "";
+            position: absolute;
+            height: 84%;
+            width: 84%;
+            border-radius: 50%;
+            background-color: #ffffff;
+        }
+        .value-container{
+            position: relative;
+            font-family: inter;
+            font-size: 50px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circular-progress">
+<div class="value-container">0%</div>
+        </div>
+    </div>
+    <script>
+        let progressBar=document.querySelector(".circular-progress");
+        let valuecontainer=document.querySelector(".value-container");
+
+
+        let progressValue=0;
+        let progressEndValue=66;
+        let speed=50;
+
+        let progress=setInterval(()=>{
+            progressValue++;
+            // console.log(progressValue);
+            valuecontainer.textContent=`${progressValue}%`;
+            progressBar.style.background=`conic-gradient(
+                #4d5bf9 ${progressValue * 3.6}deg,
+                #cadcff ${progressValue * 3.6}deg
+            )`
+            if(progressValue==progressEndValue){
+                clearInterval(progress)
+            }
+        }, speed);
+    </script>
+</body>
+</html>
